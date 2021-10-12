@@ -13,25 +13,28 @@ fn main() {
     println!("Guess the number!");
     println!("{}", repeated);
 
-    println!("Please input your guess:");
+    loop {
 
-    let mut guess = String::new();
+        println!("Please input your guess:");
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
+        let mut guess = String::new();
 
-    let guess: i32 = guess
-                        .trim()
-                        .parse()
-                        .expect("Please type a number!");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
-    println!("{}", repeated);
-    println!("You guessed: {}", guess);
+        let guess: i32 = guess
+                            .trim()
+                            .parse()
+                            .expect("Please type a number!");
 
-    match guess.cmp(&secret) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!")
+        println!("{}", repeated);
+        println!("You guessed: {}", guess);
+
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => println!("You win!")
+        }
     }
 }
