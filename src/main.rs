@@ -23,10 +23,14 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        let guess: i32 = guess
-                            .trim()
-                            .parse()
-                            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+                Ok(num) => num, // Ok value contains parsed number
+                Err(_) => {
+                    println!("Invalid guess, please try a number!");
+                    println!("{}", repeated);
+                    continue; // _ is a catch all value for all error values
+                }
+            };                      // just continues the loop
 
         println!("{}", repeated);
         println!("You guessed: {}", guess);
